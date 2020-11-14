@@ -32,7 +32,7 @@ services:
       MONGO_URL: mongodb://backend:HJG454KJG5jLh5JH@database:27017/bikes
       INDEGO_URL: https://kiosks.bicycletransit.workers.dev/phl
       OPEN_WEATHER_URL: https://api.openweathermap.org/data/2.5/weather
-      OPEN_WEATHER_KEY: ef363798f5e110d5dfacb4eaa2694c6d
+      OPEN_WEATHER_KEY:
       TOKEN: kjsfhdlkfjhdskfajdshfkds
     volumes:
       - "../:/app"
