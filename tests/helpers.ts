@@ -35,6 +35,7 @@ export const createSnapshots = () => {
     { kioskId: 2, name: 'station 2' },
     { kioskId: 3, name: 'station 3' },
   ];
+
   const snapshotsInfo = [
     { date: new Date('2018').toISOString(), temp: 200 },
     { date: new Date('2019').toISOString(), temp: 20 },

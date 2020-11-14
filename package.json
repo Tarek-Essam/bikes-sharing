@@ -9,7 +9,8 @@
     "build": "tsc",
     "start": "node .",
     "start:dev": "nodemon --inspect=0.0.0.0:9229 --watch src --ext .ts -r ts-node/register src",
-    "test": "MONGO_URL=mongodb://localhost:27017/bikes-testing TOKEN=kjshhdshdskdjhds OPEN_WEATHER_KEY=ef363798f5e110d5dfacb4eaa2694c6d jest --passWithNoTests --detectOpenHandles"
+    "test": "MONGO_URL=mongodb://localhost:27017/bikes-testing TOKEN=kjshhdshdskdjhds OPEN_WEATHER_KEY=ef363798f5e110d5dfacb4eaa2694c6d jest --passWithNoTests --detectOpenHandles",
+    "deploy": "git push heroku master"
   },
   "keywords": [],
   "author": "",
