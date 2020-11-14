@@ -1,4 +1,5 @@
 import Ajv from 'ajv';
+import express from 'express';
 import CustomError from './customError';
 
 const ajv = new Ajv({
@@ -7,7 +8,7 @@ const ajv = new Ajv({
   useDefaults: 'empty',
 });
 
-export default (path, schema) => (req, res, next) => {
+export default (path, schema) => (req: express.Request, res: express.Response, next:express.NextFunction) => {
   const validateData = ajv.compile(schema);
   const valid = validateData(req[path]);
   if (valid) return next();

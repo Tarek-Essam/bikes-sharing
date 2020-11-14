@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { fetchAvailableBikes } from '../helpers/indego';
 import { fetchCurrentWeather } from '../helpers/openWeather';
 import { Snapshot } from '../models';
@@ -12,6 +11,9 @@ export const createStationsSnapshot = async () => {
   return Snapshot.create({ stations, weather });
 };
 
+/**
+ * @param  {string} snapshotTime
+ */
 export const getSnapshot = async (snapshotTime: string) => {
   const snapshot = await Snapshot.findOne(
     { at: { $gte: new Date(snapshotTime) } },
@@ -21,6 +23,10 @@ export const getSnapshot = async (snapshotTime: string) => {
   return snapshot;
 };
 
+/**
+ * @param  {string} snapshotTime
+ * @param  {number} kioskId
+ */
 export const getSingleStation = async (snapshotTime: string, kioskId: number) => {
   const snapshot = await Snapshot.findOne(
     { at: { $gte: new Date(snapshotTime) } },

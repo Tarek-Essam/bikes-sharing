@@ -1,6 +1,13 @@
 import { CustomError } from '../types';
 
 class CustomErrorClass extends Error {
+  /**
+   * @param  {} {statusCode
+   * @param  {} code
+   * @param  {} message
+   * @param  {} details=[]
+   * @param  {CustomError} }
+   */
   constructor({
     statusCode, code, message, details = [],
   }: CustomError) {

@@ -4,6 +4,9 @@ import config from '../config';
 
 const { openWeatherKey, openWeatherUrl } = config;
 
+/**
+ * @param  {string} cityName
+ */
 export const fetchCurrentWeather = (cityName: string) => axios.get(
   openWeatherUrl,
   {

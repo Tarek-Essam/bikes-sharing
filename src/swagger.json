@@ -3,7 +3,7 @@
   "info": {
     "description": "Server to retrieve the available bikes and the waether at a certain point of time",
     "version": "1.0.0",
-    "title": "Availbale Bikes",
+    "title": "Bikes Sharing",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
