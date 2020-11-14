@@ -1,0 +1,44 @@
+version: "2.4"
+
+services:
+  
+  database:
+    image: bitnami/mongodb:4.2
+    environment:
+      - MONGODB_PASSWORD=HJG454KJG5jLh5JH
+      - MONGODB_USERNAME=backend
+      - MONGODB_DATABASE=bikes
+      - MONGODB_ROOT_PASSWORD=KHjhd459gfhJd5fj8
+      - MONGODB_PORT_NUMBER=27017
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 60s
+    volumes:
+      - database-data:/bitnami  
+
+  backend:
+    build:
+      context: ../
+      dockerfile: development.dockerfile
+    restart: "always"
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      MONGO_URL: mongodb://backend:HJG454KJG5jLh5JH@database:27017/bikes
+      INDEGO_URL: https://kiosks.bicycletransit.workers.dev/phl
+      OPEN_WEATHER_URL: https://api.openweathermap.org/data/2.5/weather
+      OPEN_WEATHER_KEY: ef363798f5e110d5dfacb4eaa2694c6d
+      TOKEN: kjsfhdlkfjhdskfajdshfkds
+    volumes:
+      - "../:/app"
+    ports:
+      - "3001:3000"
+      - "9229:9229"
+  
+volumes:
+  database-data:

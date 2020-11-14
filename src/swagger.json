@@ -1,0 +1,169 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Server to retrieve the available bikes and the waether at a certain point of time",
+    "version": "1.0.0",
+    "title": "Availbale Bikes",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "snapshot",
+      "description": "Access to snapshot of available bikes at every station"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/indego-data-fetch-and-store-it-db": {
+      "post": {
+        "tags": ["snapshot"],
+        "summary": "Add a new snapshot of available bikes and the waether in town",
+        "operationId": "createSnapshot",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully created snapshot"
+          },
+          "401": {
+            "description": "unauthorized"
+          }
+        },
+        "security": [
+          {
+            "staticToken": [
+              "write:snapshot"
+            ]
+          }
+        ]
+      }
+    },
+    "/stations": {
+      "get": {
+        "tags": ["snapshot"],
+        "summary": "return the first matched snapshot at or after a provided time",
+        "produces": ["application/json"],
+        "operationId": "getSnapshot",
+        "parameters": [
+          {
+            "name": "at",
+            "in": "query",
+            "description": "Snapshot time",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully returned matched snapshot"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "422": {
+            "description": "validation error"
+          },
+          "404": {
+            "description": "snapshot not found"
+          }
+        },
+        "security": [
+          {
+            "staticToken": [
+              "get:snapshot"
+            ]
+          }
+        ]
+      }
+    },
+    "/stations/{kioskId}": {
+      "get": {
+        "tags": ["snapshot"],
+        "summary": "return the first matched snapshot at or after a provided time for a certain station",
+        "produces": ["application/json"],
+        "operationId": "getStationOfSnapshot",
+        "parameters": [
+          {
+            "name": "at",
+            "in": "query",
+            "description": "Snapshot time",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "kioskId",
+            "in": "path",
+            "description": "Station iD",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully returned matched station for snapshot"
+          },
+          "401": {
+            "description": "unauthorized"
+          },
+          "422": {
+            "description": "validation error"
+          },
+          "404": {
+            "description": "snapshot not found"
+          }
+        },
+        "security": [
+          {
+            "staticToken": [
+              "get:snapshot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "staticToken": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "Snapshot": {
+      "type": "object",
+      "required": ["stations", "weather", "at"],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "stations": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "weather": {
+          "type": "object"
+        },
+        "at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
