@@ -29,7 +29,7 @@ mongoose.connect(mongoUrl, {
 const server: express.Application = express();
 
 server.use(helmet());
-server.use('/api/docs', swaggerDynamicLoading, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+server.use('/api/v1/docs', swaggerDynamicLoading, swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 server.use(authentication);
 server.use('/api/v1', routes);
 server.use('*', notFound);
