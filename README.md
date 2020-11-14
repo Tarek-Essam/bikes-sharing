@@ -2,6 +2,7 @@
 
 ## start app using docker
 
+Inject your open waether api secret in the development.yml docker-compose
 ```
 bash run-dev.sh
 ```
